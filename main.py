@@ -22,6 +22,8 @@ point_generator.changeXFunc()
 point_generator.changeYFunc()
 repaint()
 
+pygame.mouse.set_visible(False)
+
 #main loop
 while True:
   for event in pygame.event.get():
