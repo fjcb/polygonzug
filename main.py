@@ -15,7 +15,9 @@ point_generator = PointGenerator()
 def repaint():
   global render
   global point_generator
-  render.render(point_generator.getPointList(), pygame.Rect(128, 0, 768, 768), 10)
+  render.render(point_generator.getPointList(), pygame.Rect((g_width-g_height)/2, 0, g_height, g_height), 10, point_generator.x_func_idx, point_generator.y_func_idx, point_generator.count)
+
+pygame.mouse.set_visible(False)
 
 #create and draw first polyline
 point_generator.changeXFunc()
@@ -42,6 +44,10 @@ while True:
       if event.dict['button'] == 1:
         #left mouse button
         point_generator.changeXFunc()
+        repaint()
+      elif event.dict['button'] == 2:
+        #mouse wheelbutton
+        render.swapColors()
         repaint()
       elif event.dict['button'] == 3:
         #right mouse button
