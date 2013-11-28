@@ -23,11 +23,11 @@ class Render:
     right_width = self.width - left_width - rect.width
     
     #display generator indexes
-    text = self.font.render(str(x_idx+1), 1, self.colorFore)
+    text = self.font.render(str(x_idx), 1, self.colorFore)
     textpos = text.get_rect(centerx = left_width + 25, centery = self.height - 25)
     self.window.blit(text, textpos)
     
-    text = self.font.render(str(y_idx+1), 1, self.colorFore)
+    text = self.font.render(str(y_idx), 1, self.colorFore)
     textpos = text.get_rect(centerx = self.width - left_width - 25, centery = self.height - 25)
     self.window.blit(text, textpos)
 
@@ -56,6 +56,9 @@ class Render:
       color = self.colorBack
       self.colorBack = self.colorFore
       self.colorFore = color
+
+  def credits(self):
+    print "Fritz Jacob & Robert Kuhfss"
   
   def toggleFullscreen(self):
     pygame.display.toggle_fullscreen()

@@ -15,7 +15,17 @@ class PointGenerator:
     self.seeds        = (0, 0)
     self.x_func_idx   = 0
     self.y_func_idx   = 0
-    self.generators   = { 0:self.equidistantValues, 1:self.generateRandom, 2:self.quadrantLove, 3:self.sinus, 4:self.cosin, 5:self.randone, 6:self.modulo }
+    self.generators   = { 0:self.equidistantValues,
+                          1:self.generateRandom,
+                          2:self.quadrantLove,
+                          3:self.sinus,
+                          4:self.cosin,
+                          5:self.randone,
+                          6:self.modulo,
+                          7:self.fibonacci,
+                          8:self.expo,
+                          9:self.noise
+                          }
 
   #generates tupel(x, y) list of x and y values
   def getPointList(self):
@@ -26,16 +36,17 @@ class PointGenerator:
 
   #distribution functions------------------------------
   #has to be called for x and y list
-  def generateRandom(self):
-    pointlist = list()
-    for i in range(0, self.count):
-      pointlist.append(random.random())
-    return pointlist
-
+  
   def equidistantValues(self):
     pointlist = list()
     for i in range(0, self.count):
       pointlist.append(i * (1.0 / (self.count-1)))
+    return pointlist
+
+  def generateRandom(self):
+    pointlist = list()
+    for i in range(0, self.count):
+      pointlist.append(random.random())
     return pointlist
 
   def quadrantLove(self):
@@ -80,7 +91,45 @@ class PointGenerator:
       pointlist.append(counter % 1)
       counter += step
     return pointlist
-        
+
+  def fibonacci(self):
+    pointlist = list()
+    for i in range(0, self.count):
+      if i >= 2:
+        new = pointlist[i-1] + pointlist[i-2]
+        if new > 1:
+          new = new / 42
+        pointlist.append(new % 1)
+      else:
+        pointlist.append(random.random())
+    return pointlist
+
+  def expo(self):
+    points = list()
+    for i in range(0, self.count):
+      points.append(math.exp(i) % 1)
+    return points
+
+  def noise(self):
+    points = list()
+    points.append(random.random())
+    for i in range(0, self.count - 1):
+      points.append((points[i - 1] + random.random() * 0.2 - 0.1) % 1)
+    return points
+  
+  def primes(self):
+    pointlist = list()
+    primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+              31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+              73, 79, 83, 89, 97, 101, 103, 107, 109, 113,
+              127, 131, 137, 139, 149, 151, 157, 163, 167,
+              173, 179, 181, 191, 193, 197, 199, 211, 223,
+              227, 229, 233, 239, 241, 251, 257, 263, 269,
+              271, 277, 281, 283, 293, 307, 311]
+    for i in range(0, self.count):
+      pointlist.append((primes[i] * 0.001) % 1)
+    return pointlist
+  
   #distribution functions------------------------------
 
   def incCount(self):
