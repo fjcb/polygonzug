@@ -38,7 +38,7 @@ while True:
   try:
 
     #check idle time
-    if time.clock() - g_time > 5 * 60:
+    if time.clock() - g_time > 5:# * 60:
       render.credits()
       ping()
       

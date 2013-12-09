@@ -1,4 +1,5 @@
 import pygame
+import time
 
 #TODO: render the name of actual distribution function for user feedback
 
@@ -59,6 +60,8 @@ class Render:
 
   def credits(self):
     print "Fritz Jacob & Robert Kuhfss"
+    stamp = int(time.time())
+    pygame.image.save(self.window, "captures/capture_{0}.jpeg".format(stamp))
   
   def toggleFullscreen(self):
     pygame.display.toggle_fullscreen()
