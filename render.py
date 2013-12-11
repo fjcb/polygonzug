@@ -13,6 +13,7 @@ class Render:
     self.font = pygame.font.Font(None, 48)
     self.colorBack = (255, 255, 255)
     self.colorFore = (0,0,0)
+    pygame.display.toggle_fullscreen()
 
   #pointlist is normalized in [0,1], rect defines the area on the screen where the polyline will be rendered
   def render(self, pointlist, rect, border, x_idx, y_idx, count):
