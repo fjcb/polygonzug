@@ -62,7 +62,7 @@ while True:
       if event.type == pygame.KEYUP:
         
         if event.key == pygame.K_f:
-          render.toggleFullscreen()
+          pygame.display.toggle_fullscreen()
 
         if event.key == pygame.K_ESCAPE:
           sys.exit(0)
