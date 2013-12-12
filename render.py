@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 import pygame
 import time
 
@@ -10,7 +11,7 @@ class Render:
     self.height = height
     self.window = pygame.display.set_mode((width, height))
     pygame.font.init()
-    self.font = pygame.font.Font(None, 48)
+    self.font = pygame.font.Font("fonts/crux.ttf", 56) #pygame.font.match_font("Arial")
     self.colorBack = (255, 255, 255)
     self.colorFore = (0,0,0)
     pygame.display.toggle_fullscreen()
@@ -59,10 +60,28 @@ class Render:
       self.colorBack = self.colorFore
       self.colorFore = color
 
-  def credits(self):
-    print "Fritz Jacob & Robert Kuhfss"
+  def save(self):
     stamp = int(time.time())
     pygame.image.save(self.window, "captures/capture_{0}.jpeg".format(stamp))
+    
+  def credits(self):
+    rect = pygame.Rect((self.width-self.height)/2, 0, self.height, self.height)
+    left_width = rect.left
+    right_width = self.width - left_width - rect.width
+
+    text = pygame.font.Font("fonts/crux.ttf", 77).render("PYPIGONZUG++", 1, self.colorFore)
+    textpos = text.get_rect(centerx = self.window.get_rect().centerx, centery = self.height/2 - 25)
+    #pygame.draw.rect(self.window, self.colorBack, textpos) #background color?
+    self.window.blit(text, textpos)
+    
+    text = pygame.font.Font("fonts/crux.ttf", 63).render("Fritz Jacob & Robert Kuhfﬂ", 1, self.colorFore)
+    textpos = text.get_rect(centerx = self.window.get_rect().centerx, centery = self.height/2 + 25)
+    #pygame.draw.rect(self.window, self.colorBack, textpos) #background color?
+    self.window.blit(text, textpos)
+    
+    pygame.display.flip()
+    
+    
   
   def toggleFullscreen(self):
     pygame.display.toggle_fullscreen()
