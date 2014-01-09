@@ -6,9 +6,9 @@ import math
 class PointGenerator:
 
   def __init__(self):
-    self.count        = 4  #number of points to be rendered
+    self.count        = 23  #number of points to be rendered
     self.count_min    = 4
-    self.count_max    = 51
+    self.count_max    = 100
     self.count_amount = 1
     self.x_list       = list()
     self.y_list       = list()
@@ -17,14 +17,14 @@ class PointGenerator:
     self.y_func_idx   = 0
     self.generators   = { 0:self.equidistantValues,
                           1:self.generateRandom,
-                          2:self.quadrantLove,
-                          3:self.sinus,
-                          4:self.cosin,
-                          5:self.randone,
-                          6:self.modulo,
-                          7:self.fibonacci,
-                          8:self.expo,
-                          9:self.noise
+                          2:self.frieder,
+                          3:self.modulo,
+                          4:self.noise,
+                          5:self.quadrantLove,
+                          6:self.sinus,
+                          7:self.randone,
+                          8:self.fibonacci,
+                          9:self.expo
                           }
 
   #generates tupel(x, y) list of x and y values
@@ -78,7 +78,7 @@ class PointGenerator:
 
   def randone(self):
     pointlist = list()
-    rand = random.random()
+    rand = random.random()*0.8+0.1 # = 0.1 - 0.9
     for i in range(0, self.count):
       pointlist.append(rand + math.sin(random.random()*2*math.pi)*0.1)
     return pointlist
@@ -107,7 +107,7 @@ class PointGenerator:
   def expo(self):
     points = list()
     for i in range(0, self.count):
-      points.append(math.exp(i) % 1)
+      points.append((math.exp(i*0.42) / 42) % 1)
     return points
 
   def noise(self):
@@ -115,6 +115,13 @@ class PointGenerator:
     points.append(random.random())
     for i in range(0, self.count - 1):
       points.append((points[i - 1] + random.random() * 0.2 - 0.1) % 1)
+    return points
+
+  def frieder(self):
+    points = list()
+    name = ['F', 'R', 'I', 'E', 'D', 'E', 'R', 'N', 'A', 'K', 'E']
+    for i in range(0, self.count):
+      points.append((((ord(name[i % len(name)])-60) * 0.1)+0.05) % 1)
     return points
   
   def primes(self):
